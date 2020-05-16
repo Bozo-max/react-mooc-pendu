@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import GuessLetter from './GuessLetter'
 import Key from './Key';
+import TryCount from './TryCount';
 
 const WORDS = ['caca', 'prout', 'pigeon', 'piscine', 'application', 'enfant', 'bisou', 'detruire', 'chapeau', 'ordinateur', 'console', 'video'];
 
@@ -11,7 +12,8 @@ class App extends Component {
   state = {
     hiddenWord : WORDS[Math.floor(Math.random()*WORDS.length)].split(''),
     foundLetters : [],
-    LETTERS : 'abcdefghijklmnopqrstuvwxyz'.split('')
+    LETTERS : 'abcdefghijklmnopqrstuvwxyz'.split(''),
+    tries: 0
   }
 
   getSymbolForLetter = (value, index) => {
@@ -19,12 +21,12 @@ class App extends Component {
   }
 
   handleClickForKey = (value) =>{
-    const {hiddenWord, foundLetters} = this.state;
+    const {hiddenWord, foundLetters, tries} = this.state;
     var index = -1;
     while((index = hiddenWord.indexOf(value, index+1))>-1){
       foundLetters.push(index);
     }
-    this.setState({foundLetters:foundLetters});
+    this.setState({foundLetters:foundLetters, tries:tries+1});
   }
 
   render(){
@@ -51,7 +53,7 @@ class App extends Component {
           ))
         }
       </div>
-
+      <TryCount tries = {this.state.tries}/>
     </div>
   );
   }

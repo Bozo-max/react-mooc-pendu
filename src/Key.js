@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import './Key.css'
 
 class Key extends Component{
@@ -24,6 +25,11 @@ class Key extends Component{
       </div>
     )
   }
+}
+
+Key.propTypes = {
+  symbol: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default Key

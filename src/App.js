@@ -4,10 +4,12 @@ import './App.css';
 import GuessLetter from './GuessLetter'
 import Key from './Key';
 
+const WORDS = ['caca', 'prout', 'pigeon', 'piscine', 'application', 'enfant', 'bisou', 'detruire', 'chapeau', 'ordinateur', 'console', 'video'];
+
 class App extends Component {
 
   state = {
-    hiddenWord : 'cache'.split(''),
+    hiddenWord : WORDS[Math.floor(Math.random()*WORDS.length)].split(''),
     foundLetters : [],
     LETTERS : 'abcdefghijklmnopqrstuvwxyz'.split('')
   }

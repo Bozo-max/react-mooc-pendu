@@ -6,13 +6,13 @@ import Key from './Key';
 import TryCount from './TryCount';
 
 const WORDS = ['caca', 'prout', 'pigeon', 'piscine', 'application', 'enfant', 'bisou', 'detruire', 'chapeau', 'ordinateur', 'console', 'video'];
-
+const LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 class App extends Component {
 
   state = {
     hiddenWord : WORDS[Math.floor(Math.random()*WORDS.length)].split(''),
     foundLetters : [],
-    letters : 'abcdefghijklmnopqrstuvwxyz'.split(''),
+    letters : LETTERS.split(''),
     tries: 0
   }
 
@@ -30,12 +30,25 @@ class App extends Component {
     this.setState({foundLetters:foundLetters, tries:tries+1, letters:letters});
   }
 
+  handleClickReplay = ()=>{
+    this.setState(
+      {
+        hiddenWord : WORDS[Math.floor(Math.random()*WORDS.length)].split(''),
+        foundLetters : [],
+        letters : LETTERS.split(''),
+        tries: 0
+      }
+    )
+  }
+
   render(){
+    const {hiddenWord, foundLetters, letters, tries} = this.state;
+    const won = (hiddenWord.length===foundLetters.length);
     return (
     <div className="App">
       <div className = 'hiddenWord'>
         {
-            this.state.hiddenWord.map((value, index)=>(
+            hiddenWord.map((value, index)=>(
               <GuessLetter
                 symbol = {this.getSymbolForLetter(value,  index)}
                 key = {index}
@@ -43,9 +56,10 @@ class App extends Component {
               ))
         }
       </div>
+
       <div className='keyboard'>
         {
-          this.state.letters.map((value, index)=>(
+          letters.map((value, index)=>(
             <Key
               symbol={value}
               key={value}
@@ -54,7 +68,10 @@ class App extends Component {
           ))
         }
       </div>
-      <TryCount tries = {this.state.tries}/>
+
+      <TryCount tries = {tries}/>
+
+      {won && <div class='congrats'>BRAVO !!!!!!!! <button onClick={this.handleClickReplay}>Rejouer</button></div>}
     </div>
   );
   }

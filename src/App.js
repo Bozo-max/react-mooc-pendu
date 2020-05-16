@@ -12,7 +12,7 @@ class App extends Component {
   state = {
     hiddenWord : WORDS[Math.floor(Math.random()*WORDS.length)].split(''),
     foundLetters : [],
-    LETTERS : 'abcdefghijklmnopqrstuvwxyz'.split(''),
+    letters : 'abcdefghijklmnopqrstuvwxyz'.split(''),
     tries: 0
   }
 
@@ -21,15 +21,17 @@ class App extends Component {
   }
 
   handleClickForKey = (value) =>{
-    const {hiddenWord, foundLetters, tries} = this.state;
+    const {hiddenWord, foundLetters, tries, letters} = this.state;
     var index = -1;
+    letters.splice(letters.indexOf(value), 1);
     while((index = hiddenWord.indexOf(value, index+1))>-1){
       foundLetters.push(index);
     }
-    this.setState({foundLetters:foundLetters, tries:tries+1});
+    this.setState({foundLetters:foundLetters, tries:tries+1, letters:letters});
   }
 
   render(){
+    console.log(this.state.letters);
     return (
     <div className="App">
       <div className = 'hiddenWord'>
@@ -44,10 +46,10 @@ class App extends Component {
       </div>
       <div className='keyboard'>
         {
-          this.state.LETTERS.map((value, index)=>(
+          this.state.letters.map((value, index)=>(
             <Key
               symbol={value}
-              key={index}
+              key={value}
               onClick = {this.handleClickForKey}
             />
           ))

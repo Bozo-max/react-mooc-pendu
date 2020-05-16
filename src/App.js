@@ -31,7 +31,6 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state.letters);
     return (
     <div className="App">
       <div className = 'hiddenWord'>

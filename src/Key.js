@@ -14,8 +14,10 @@ class Key extends Component{
   handleClick = () => {this.setState({status:'clicked'})}
 
   render(){
+    const {onClick} = this.props;
     return (
-      <div className={`key ${this.state.status}`} onClick={this.handleClick}>
+      <div className={`key ${this.state.status}`}
+      onClick={()=>{onClick(this.symbol); this.handleClick()}}>
       <span className='symbol'>
       {this.symbol}
       </span>

@@ -16,6 +16,15 @@ class App extends Component {
     return this.state.foundLetters.includes(index) ? value : '_';
   }
 
+  handleClickForKey = (value) =>{
+    const {hiddenWord, foundLetters} = this.state;
+    var index = -1;
+    while((index = hiddenWord.indexOf(value, index+1))>-1){
+      foundLetters.push(index);
+    }
+    this.setState({foundLetters:foundLetters});
+  }
+
   render(){
     return (
     <div className="App">
@@ -23,7 +32,7 @@ class App extends Component {
         {
             this.state.hiddenWord.map((value, index)=>(
               <GuessLetter
-                symbol = {this.getSymbolForLetter(index,  value)}
+                symbol = {this.getSymbolForLetter(value,  index)}
                 key = {index}
                 />
               ))
@@ -35,6 +44,7 @@ class App extends Component {
             <Key
               symbol={value}
               key={index}
+              onClick = {this.handleClickForKey}
             />
           ))
         }

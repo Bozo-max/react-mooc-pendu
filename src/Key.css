@@ -1,0 +1,13 @@
+.key{
+  display: flex;
+  flex: 1 1 calc(100% / 13 - 0.6em);
+  margin: 0.2em;
+  border: 1px solid black;
+  border-radius: 5px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.key.clicked{
+  background-color: lightgrey;
+}

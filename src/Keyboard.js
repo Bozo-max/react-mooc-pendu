@@ -1,5 +1,6 @@
 import React from 'react';
 import Key from './Key';
+import './Keyboard.css'
 
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('');
 console.log(LETTERS);
@@ -9,7 +10,6 @@ const Keyboard = (()=>
       <Key
         symbol={symbol}
         key={index}
-        onClick={(symbol)=>console.log(symbol)}
       />
     ))}
   </div>)
